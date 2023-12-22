@@ -60,6 +60,18 @@ public class CustomerDTO {
         this.occupation = occupation;
     }
 
+    public CustomerDTO(long id, String name, String email, LocalDate dob, CustomerOccupation occupation, CustomerGroup customerGroup) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.occupation = occupation;
+        this.customerGroup = customerGroup;
+    }
+
+    public CustomerDTO() {
+    }
+
     @Override
     public String toString() {
         return "CustomerDTO{" +

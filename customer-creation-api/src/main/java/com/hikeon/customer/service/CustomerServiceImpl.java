@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService{
     CustomerFilterService customerFilterService;
     @Override
     public Optional<CustomerDTO> createCustomer(CustomerDTO customerDTO){
-
+        if(customerDTO==null) return Optional.empty();
         try {
             if (customerRepository.existsByEmail(customerDTO.getEmail()))
                 throw new EmailAlreadyExistsException("! Email already Exists !");
@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService{
                 throw new InvalidAgeException("! Age should be above 18 Year");
 
         CustomerGroup customerGroup;
-        if (customerDTO.getEmail().endsWith("@hikeon.tech")) customerGroup = CustomerGroup.HIKEON;
+        if ( customerDTO.getEmail()!=null && customerDTO.getEmail().endsWith("@hikeon.tech")) customerGroup = CustomerGroup.HIKEON;
         else {
             if (customerDTO.getOccupation() == CustomerOccupation.DEVELOPER) customerGroup = CustomerGroup.DEVELOPER;
             else if (customerDTO.getOccupation() == CustomerOccupation.CHEF) customerGroup = CustomerGroup.CHEF;
