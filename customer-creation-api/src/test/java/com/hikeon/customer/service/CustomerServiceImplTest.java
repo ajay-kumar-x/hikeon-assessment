@@ -49,19 +49,18 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testCreateCustomer_EmailAlreadyExists() {
-        CustomerDTO customerDTO = new CustomerDTO(/* set required fields */);
+        CustomerDTO customerDTO = new CustomerDTO(1,"Ajay","ajaykr1729@gmail.com",LocalDate.of(1998,9,5), CustomerOccupation.DEVELOPER, CustomerGroup.DEVELOPER);
 
         when(customerRepository.existsByEmail(anyString())).thenReturn(true);
 
         Optional<CustomerDTO> result = customerService.createCustomer(customerDTO);
 
         assertFalse(result.isPresent());
-        // Add assertions based on the expected behavior
     }
 
     @Test
     public void testCreateCustomer_InvalidAge() {
-        CustomerDTO customerDTO = new CustomerDTO(/* set required fields */);
+        CustomerDTO customerDTO = new CustomerDTO(1,"Ajay","ajaykr1729@gmail.com",LocalDate.of(1998,9,5), CustomerOccupation.DEVELOPER, CustomerGroup.DEVELOPER);
 
         when(customerRepository.existsByEmail(anyString())).thenReturn(false);
         when(customerFilterService.isValidAge(any())).thenReturn(false);
@@ -69,8 +68,6 @@ public class CustomerServiceImplTest {
         Optional<CustomerDTO> result = customerService.createCustomer(customerDTO);
 
         assertFalse(result.isPresent());
-        // Add assertions based on the expected behavior
-    }
 
-    // You can add more test methods to cover other scenarios as needed
+    }
 }
